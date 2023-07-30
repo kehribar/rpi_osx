@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# ...
+REAL_PATH=$(realpath ${BASH_SOURCE:-$0})
+DIR_PATH=$(dirname $REAL_PATH)
+SYSROOT=${DIR_PATH}/../sysroot
+
+# ...
+export PKG_CONFIG_PATH=
+export PKG_CONFIG_LIBDIR=${SYSROOT}/usr/lib/pkgconfig:${SYSROOT}/usr/share/pkgconfig:${SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig
+export PKG_CONFIG_SYSROOT_DIR=${SYSROOT}
+
+# ...
+exec pkg-config "$@"
